@@ -40,6 +40,6 @@ services:
     ports:
       - '3500:3500'
     networks:
-      - transaction-network
+      - democredit-network
 
     

@@ -1,19 +1,25 @@
+/**
+ * @type {Knex}
+ */
 import * as dotenv from 'dotenv'
 dotenv.config({ debug: true })
-
 export default {
   development: {
     client: 'mysql',
     connection: {
-      filename: './db/init.sql'
+      database: process.env.DBNAME,
+      user:     process.env.DBUSER,
+      password: process.env.DBPASSWORD,
+      port: process.env.DBPORT
     }
   },
   production: {
-    client: 'postgresql',
+    client: 'mysql',
     connection: {
       database: process.env.DBNAME,
       user:     process.env.DBUSER,
-      password: process.env.DBPASSWORD
+      password: process.env.DBPASSWORD,
+      port: process.env.DBPORT
     },
     pool: {
       min: 2,
