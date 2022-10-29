@@ -1,0 +1,45 @@
+version: "3.3"
+
+volumes:
+  db: {}
+
+networks:
+  democredit-network: {}
+
+services:
+  database:
+    image: mysql:latest
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=democredit
+      - MYSQL_ALLOW_EMPTY_PASSWORD
+      - MYSQL_USER=root
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - democredit-network
+      
+  restapi:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args: 
+        PORT: 3500
+    restart: always
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - database
+    ports:
+      - '3500:3500'
+    networks:
+      - transaction-network
+
+    

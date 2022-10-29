@@ -1,0 +1,45 @@
+{
+  "name": "demo-credit",
+  "version": "1.0.0",
+  "description": "Demo Credit is a mobile lending app with the  wallet functionality implemented. This demo feature is implemented so that users can deposit transfer and withdraw money from the wallet.",
+  "main": "src/server.ts",
+  "scripts": {
+    "start:dev": "nodemon",
+    "lint": "eslint . --ext .ts",
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node dist/src/index.js",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "demo credit"
+  },
+  "keywords": [
+    "typescript",
+    "knex",
+    "nodejs",
+    "mysql"
+  ],
+  "author": "proxy6",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "joi": "^17.6.4",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^2.3.0",
+    "mysql": "^2.18.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "eslint": "^8.26.0",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
