@@ -12,4 +12,24 @@ export class Validation{
             trx_pin: Joi.string(),
 		});
     }
+    static get Login(){
+        return Joi.object().keys({
+			phone: Joi.string().required(),
+            password: Joi.string().required(),
+		});
+    }
+    static get DepositOrWithdraw(){
+        return Joi.object().keys({
+			user_id: Joi.string().required(),
+            amount: Joi.number().positive(),
+            type: Joi.string().required() 
+		});
+    }
+    static get Transfer(){
+        return Joi.object().keys({
+			receiver: Joi.string().required(),
+            sender: Joi.string().required(),
+            amount: Joi.number().positive(),
+		});
+    }
 }

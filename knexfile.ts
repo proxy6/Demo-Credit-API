@@ -29,6 +29,7 @@ const dbConfig: { [key: string]: Knex.Config } = {
       database: process.env.DBNAME,
       user:     process.env.DBUSER,
       password: process.env.DBPASSWORD,
+      host: process.env.HOST,
       port: 3306
     },
     pool: {
@@ -47,6 +48,7 @@ const dbConfig: { [key: string]: Knex.Config } = {
       database: process.env.DBNAME,
       user:     process.env.DBUSER,
       password: process.env.DBPASSWORD,
+
       port: 3306
       
     },  

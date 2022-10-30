@@ -1,15 +1,26 @@
 import {Request, Response, NextFunction } from "express";
-import {User} from '../model/user'
-import UserService from '../service/user-service'
+import UserService from '../service/user.service'
 import {HashPassword, GenerateAccountNumber} from "../utils/utilities"
 export default class UserController{
     static async Signup(req: Request, res: Response, next: NextFunction){
-        const userPassword = await HashPassword(req.body.password)
-        const acctNumber = await GenerateAccountNumber()
-        req.body.password = userPassword
-        const user =  await UserService.Signup({...req.body, acctNumber})
-        res.status(201).json(user)
+        try{
+            req.body.password = await HashPassword(req.body.password)
+            req.body.account_number = await GenerateAccountNumber()
+            const user =  await UserService.Signup(req.body)
+            res.status(201).json(user)
+        }catch(e){
+            console.log(e)
+            res.send(e)
+        }
     }
-    static async Login(req: Request, res: Response, next: NextFunction){}
+    static async Login(req: Request, res: Response, next: NextFunction){
+        try{
+            const user =  await UserService.Login(req.body)
+            res.status(201).json(user)
+        }catch(e){
+            console.log(e)
+            res.send(e)
+        }    
+    }
     static async getUserByAccountNumber(req: Request, res: Response, next: NextFunction){}
 }
