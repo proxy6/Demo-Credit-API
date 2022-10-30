@@ -8,7 +8,7 @@ export class Validation{
             phone: Joi.string().required(),
 			email: Joi.string().email(),
 			password: Joi.string().required(),
-            role: Joi.string().required(),
+            role: Joi.valid('Customer', 'Admin'),
             trx_pin: Joi.string(),
 		});
     }

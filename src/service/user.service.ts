@@ -1,4 +1,4 @@
-import { User, UserModel } from "../model/user.model";
+import { User, UserModel, User_role } from "../model/user.model";
 import { omit } from 'lodash';
 import {GenerateSignature} from '../utils/utilities'
 export default class UserService{
