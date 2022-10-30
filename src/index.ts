@@ -1,11 +1,13 @@
 import * as dotenv from 'dotenv'
 import app from './server'
-// import config from './util/config';
+import connectDB from './database'
 dotenv.config();
-const port = process.env.PORT || 3000
- 
-    app.listen(port, ()=>{
-        
+const port = process.env.PORT || 3500
+    
+    app.listen(port, async ()=>{
+        await connectDB()
         console.log(`Listening to port ${port}`)
-    })
+    });
+
+    
 
