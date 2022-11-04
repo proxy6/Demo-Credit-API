@@ -1,14 +1,11 @@
 import * as dotenv from 'dotenv'
 dotenv.config();
-
-
 import { mockNext, mockRequest, mockResponse } from '../__mocks__/http';
 import UserController  from './user.controller';
 import UserService from '../service/user.service'
-import Util from '../utils/utilities'
 
 describe('User Controller', ()=>{
-	describe('Signup Controller', () => {
+	describe('Signup', () => {
 		beforeEach(()=>{
 			jest.clearAllMocks()
 		})
@@ -131,7 +128,7 @@ describe('User Controller', ()=>{
 		});
 	
 	});
-	describe('Login Controller', () => {
+	describe('Login', () => {
 		beforeEach(()=>{
 			jest.clearAllMocks()
 		})
