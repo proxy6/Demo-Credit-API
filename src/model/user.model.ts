@@ -46,7 +46,7 @@ export class UserModel extends Model implements User {
         const user = await this.query().select("*").where({phone: userDetails.phone}).first()
         if(!user) return Promise.reject("Phone Number or Password Incorrect")
         const validatePass = await Util.validatePassword(userDetails.password, user.password)
-        if(validatePass == false) return Promise.reject('User or Password Incorrect') 
+        if(validatePass == false) return Promise.reject('Phone Number or Password Incorrect') 
         return user
     }
 

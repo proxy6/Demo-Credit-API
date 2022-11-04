@@ -17,6 +17,7 @@ export default class UserService{
     }
     static async fetchUser(userDetails: Pick<Account, "account_number" | 'user_id'>){
         const user = await AccountModel.fetchUser(userDetails)
+        if(user.length == 0) return Promise.reject("User Not Found")
         return user
     }
 }
