@@ -17,7 +17,7 @@ export default class UserController{
             res.json(e)
         }    
     }
-    static async getUserByAccountNumber(req: Request, res: Response, next: NextFunction){
+    static async getUserDetails(req: Request, res: Response, next: NextFunction){
         try{
             const user = await UserService.fetchUser(req.body)
             res.status(200).json(user)

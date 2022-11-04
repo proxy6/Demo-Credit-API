@@ -197,7 +197,7 @@ describe('User Controller', ()=>{
 				account_number: "7216526944",
 				current_balance: 0
 			});
-			await UserController.getUserByAccountNumber(req, res, mockNext);
+			await UserController.getUserDetails(req, res, mockNext);
 			expect(res.status).toBeCalledWith(200);
 			expect(userSpy).toBeCalledWith({
 				user_id: '1'
@@ -222,7 +222,7 @@ describe('User Controller', ()=>{
 			const userSpy = jest.spyOn(UserService, 'fetchUser');
 			userSpy.mockRejectedValueOnce("User Not Found");
 			try {
-				await UserController.getUserByAccountNumber(req, res, mockNext);
+				await UserController.getUserDetails(req, res, mockNext);
 			} catch(e) {
 				expect(userSpy).toBeCalledWith({
 					user_id: '09283748393',

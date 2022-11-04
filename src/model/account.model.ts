@@ -10,7 +10,6 @@ export interface Account{
 }
 export class AccountModel extends Model implements Account {
     static tableName= 'accounts';
-
     static async balance(id: string){
     const balance = this.query()
     .select('current_balance').where({user_id: id})
@@ -18,9 +17,9 @@ export class AccountModel extends Model implements Account {
     return balance
     }
 
-    static async updateAccountBalance(newBalance: number, trxDetails: Transaction ){
-      trxDetails.user_id = trxDetails.user_id || trxDetails.sender || trxDetails.receiver
-      const deposit = this.query().update({current_balance: newBalance}).where({user_id: trxDetails.user_id})
+    static async updateAccountBalance(newBalance: number, trxDetails: any ){
+      console.log(trxDetails)
+      const deposit = this.query().update({current_balance: newBalance}).where({user_id: trxDetails})
       return deposit
     }
 

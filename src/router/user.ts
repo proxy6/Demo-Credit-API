@@ -7,5 +7,5 @@ const router = Router();
 
 router.post('/signup', $(Validator(Validation.Signup)), $(UserController.signup))
 router.post('/login', $(Validator(Validation.Login)), $(UserController.login))
-router.post('/user', $(UserController.getUserByAccountNumber) )
+router.post('/user', $(UserController.getUserDetails) )
 export default router

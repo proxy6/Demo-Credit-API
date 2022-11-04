@@ -27,10 +27,9 @@ export default class TransactionController{
             const transfer = await TransactionService.transfer(req.body)
             res.status(201).json({message: "Transfer Successful", data: transfer})
             }catch(e){
+                console.log(e)
                 res.json(e)
             }    
     }
-    static async getTransactionsOfAccount(req: Request, res: Response, next: NextFunction){}
-    static async getTransactionDetails(req: Request, res: Response, next: NextFunction){}
 
 }

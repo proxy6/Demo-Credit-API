@@ -10,7 +10,7 @@ export default class TransactionService {
         //calculate new account balance 
         const newBalance = account.current_balance + trxDetails.amount
         // update account balance
-        await AccountModel.updateAccountBalance( newBalance, trxDetails)
+        await AccountModel.updateAccountBalance( newBalance, trxDetails.user_id)
         const transaction = await TransactionModel.createTransaction(trxDetails)
 
         return transaction
@@ -25,27 +25,28 @@ export default class TransactionService {
         //calculate new account balance 
         const newBalance = account.current_balance - trxDetails.amount
         // update account balance
-        await AccountModel.updateAccountBalance( newBalance, trxDetails)
+        await AccountModel.updateAccountBalance( newBalance, trxDetails.user_id)
         const transaction = await TransactionModel.createTransaction(trxDetails)
         return transaction
     }
     static async transfer(trxDetails: Transaction){
         //check balance 
         trxDetails.trx_ref = await Util.generateRefernce()
-        const account =  await AccountModel.Balance(trxDetails.sender)
-        if(!account) return Promise.reject("Account Does Not Exist")
-        //confirm account details for transfer
-        const acct = await AccountModel.confirmAccount(trxDetails.receiver)
+        const senderAccount =  await AccountModel.balance(trxDetails.sender)
+        if(!senderAccount) return Promise.reject("Account Does Not Exists")
+        //check for sufficient fund
+        if(senderAccount.current_balance < trxDetails.amount) return Promise.reject("Insufficient Funds")
+        //confirm  receiver account details for transfer
+        const receiverAccount = await AccountModel.confirmAccount(trxDetails.receiver)
+        if(!receiverAccount) return Promise.reject("Account Does Not Exists")
         //calculate new sender account balance 
-        const senderNewBalance = account.current_balance - trxDetails.amount
+        const senderNewBalance = senderAccount.current_balance - trxDetails.amount
+        //calculate new sender account balance 
+        const receiverNewBalance = receiverAccount.current_balance + trxDetails.amount
         // update account balance
-        await AccountModel.updateAccountBalance( senderNewBalance, trxDetails)
-         //calculate new sender account balance 
-        const receiverNewBalance = acct.current_balance + trxDetails.amount
-         // update account balance
-        await AccountModel.updateAccountBalance( receiverNewBalance, trxDetails)
-        const transaction = await TransactionModel.TransferTransaction(trxDetails)
-        console.log(transaction)
+        await AccountModel.updateAccountBalance( senderNewBalance, trxDetails.sender)
+        await AccountModel.updateAccountBalance( receiverNewBalance, trxDetails.receiver)
+        const transaction = await TransactionModel.transferTransaction(trxDetails)
         return transaction
     }
 }
