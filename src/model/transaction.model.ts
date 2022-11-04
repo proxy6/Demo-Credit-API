@@ -16,7 +16,7 @@ export interface Transaction{
 }
 export class TransactionModel extends Model implements Transaction {
     static tableName= 'transactions';
-    static async CreateTransaction(trxDetails: Transaction){
+    static async createTransaction(trxDetails: Transaction){
         const transaction = await this.query().insert({
             user_id: trxDetails.user_id,
             amount: trxDetails.amount,
@@ -25,7 +25,7 @@ export class TransactionModel extends Model implements Transaction {
         })
         return transaction
     }
-    static async TransferTransaction(trxDetails: Transaction){
+    static async transferTransaction(trxDetails: Transaction){
         const transaction = await this.query().insert({
             sender: trxDetails.sender,
             receiver: trxDetails.receiver,

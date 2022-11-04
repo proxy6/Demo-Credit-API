@@ -9,6 +9,5 @@ router.get('/', (req, res)=>{
 
 router.use('/', userRouter);
 router.use('/', transactionRouter)
-// router.use('/transaction', isAuthorized('user'), transaction)
 
 export default router;

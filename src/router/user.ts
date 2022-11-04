@@ -5,6 +5,7 @@ import $ from 'express-async-handler'
 import UserController from '../controller/user.controller';
 const router = Router();
 
-router.post('/signup', $(Validator(Validation.Signup)), $(UserController.Signup))
-router.post('/login', $(Validator(Validation.Login)), $(UserController.Login))
+router.post('/signup', $(Validator(Validation.Signup)), $(UserController.signup))
+router.post('/login', $(Validator(Validation.Login)), $(UserController.login))
+router.post('/user', $(UserController.getUserByAccountNumber) )
 export default router

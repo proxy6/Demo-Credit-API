@@ -5,7 +5,7 @@ import $ from 'express-async-handler'
 import TransactionController from '../controller/transaction.controller';
 const router = Router();
 
-router.post('/deposit', $(Validator(Validation.DepositOrWithdraw)), $(TransactionController.Deposit))
-router.post('/withdraw', $(Validator(Validation.DepositOrWithdraw)), $(TransactionController.Withdraw))
-router.post('/transfer', $(Validator(Validation.Transfer)), $(TransactionController.Transfer))
+router.post('/deposit', $(Validator(Validation.DepositOrWithdraw)), $(TransactionController.deposit))
+router.post('/withdraw', $(Validator(Validation.DepositOrWithdraw)), $(TransactionController.withdraw))
+router.post('/transfer', $(Validator(Validation.Transfer)), $(TransactionController.transfer))
 export default router
